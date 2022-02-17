@@ -49,9 +49,10 @@ pipeline {
                 archiveArtifacts 'target/*.war'
             }
         }
-       stage('Deploy Application with Tomcat Server') {
+       stage('Deploy Application with Tomcat Server using Ansible') {
             steps {
-                echo 'Addressbook Project Deployment with Tomcat Server'
+                echo 'Addressbook Project Deployment with Tomcat Server using Ansible'
+                ansiblePlaybook credentialsId: 'ansible-private-key', disableHostKeyChecking: true, installation: 'my-ansible', inventory: 'hosts.inv', playbook: 'deployment.yaml'
             }
         }
     }
