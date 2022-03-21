@@ -58,6 +58,7 @@ pipeline {
         stage('Deploy Application with Tomcat Server using Ansible') {
             steps {
                 echo 'Addressbook Project Deployment with Docker Container '
+                sh "sudo apt install docker.io"
                 sh "docker build -f Dockerfile -t addressbook-image ."
                 sh "docker images"
                 sh "docker container run -d --name addressbook-app -P addressbook-image"
