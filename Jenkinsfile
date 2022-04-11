@@ -52,15 +52,7 @@ pipeline {
        stage('Deploy Application with Tomcat Server using Ansible') {
             steps {
                 echo 'Addressbook Project Deployment with Tomcat Server using Ansible'
-                //ansiblePlaybook credentialsId: 'ansible-private-key', disableHostKeyChecking: true, installation: 'my-ansible', inventory: 'hosts.inv', playbook: 'deployment.yaml'
-            }
-        }
-        stage('Deploy Application with Docker Container') {
-            steps {
-                echo 'Addressbook Project Deployment with Docker Container '
-                sh "docker build -f Dockerfile -t addressbook-image ."
-                sh "docker images"
-                sh "docker container run -d --name addressbook-app -P addressbook-image"
+                ansiblePlaybook credentialsId: 'ansible-private-key', disableHostKeyChecking: true, installation: 'my-ansible', inventory: 'hosts.inv', playbook: 'deployment.yaml'
             }
         }
     }
